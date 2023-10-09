@@ -1,0 +1,129 @@
+
+TABLA BITACORA Y TRIGGER
+
+CREATE TABLE bitacora (
+    id_bitacora INT AUTO_INCREMENT PRIMARY KEY,
+    actividad VARCHAR(255),
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+-- Trigger para la tabla "productos"
+DELIMITER //
+CREATE TRIGGER RegistrarInsercionProducto
+AFTER INSERT ON productos
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se agregó un nuevo producto con ID ', NEW.id_producto));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER RegistrarActualizacionProducto
+AFTER UPDATE ON productos
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se actualizó el producto con ID ', OLD.id_producto));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER RegistrarEliminacionProducto
+AFTER DELETE ON productos
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se eliminó el producto con ID ', OLD.id_producto));
+END;
+//
+DELIMITER ;
+
+-- Trigger para la tabla "clientes"
+DELIMITER //
+CREATE TRIGGER RegistrarInsercionCliente
+AFTER INSERT ON clientes
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se agregó un nuevo cliente con ID ', NEW.id_cliente));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER RegistrarActualizacionCliente
+AFTER UPDATE ON clientes
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se actualizó el cliente con ID ', OLD.id_cliente));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER RegistrarEliminacionCliente
+AFTER DELETE ON clientes
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se eliminó el cliente con ID ', OLD.id_cliente));
+END;
+//
+DELIMITER ;
+
+
+-- Trigger para la tabla "carrito_compra"
+DELIMITER //
+CREATE TRIGGER RegistrarInsercionCarritoCompra
+AFTER INSERT ON carrito_compra
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se creó un nuevo carrito de compra con ID ', NEW.id_carrito));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER RegistrarEliminacionCarritoCompra
+AFTER DELETE ON carrito_compra
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se eliminó el carrito de compra con ID ', OLD.id_carrito));
+END;
+//
+DELIMITER ;
+
+-- Trigger para la tabla "detalle_carrito"
+DELIMITER //
+CREATE TRIGGER RegistrarInsercionDetalleCarrito
+AFTER INSERT ON detalle_carrito
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se agregó un nuevo detalle al carrito de compra con ID ', NEW.id_carrito));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER RegistrarActualizacionDetalleCarrito
+AFTER UPDATE ON detalle_carrito
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se actualizó un detalle del carrito de compra con ID ', OLD.id_carrito));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER RegistrarEliminacionDetalleCarrito
+AFTER DELETE ON detalle_carrito
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (actividad) VALUES (CONCAT('Se eliminó un detalle del carrito de compra con ID ', OLD.id_carrito));
+END;
+//
+DELIMITER ;
+
+
+
+
