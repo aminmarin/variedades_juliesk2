@@ -5,34 +5,34 @@ USE variedades_juliesk2;
 
 -- Crear la tabla de Productos
 CREATE TABLE productos (
-    id_producto INT PRIMARY KEY,
-    nombre VARCHAR(255),
-    categoria VARCHAR(50),
-    precio DECIMAL(10, 2),
-    stock INT
+    id_producto INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL
 );
 
 -- Crear la tabla de Clientes
 CREATE TABLE clientes (
-    id_cliente INT PRIMARY KEY,
-    nombre VARCHAR(100),
-    direccion VARCHAR(255),
-    email VARCHAR(100)
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL
 );
 
 -- Crear la tabla de Usuarios
 CREATE TABLE usuarios (
-    id_usuario INT PRIMARY KEY,
-    username VARCHAR(50),
-    password VARCHAR(255),
-    tipo VARCHAR(20) -- Puede ser 'cliente' o 'admin'
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    tipo VARCHAR(20) NOT NULL-- Puede ser 'cliente' o 'admin'
 );
 
 -- Crear la tabla de Carrito de Compra
 CREATE TABLE carrito_compra (
-    id_carrito INT PRIMARY KEY,
-    id_cliente INT,
-    id_usuario INT,
+    id_carrito INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    id_cliente INT NOT NULL,
+    id_usuario INT NOT NULL,
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
@@ -40,10 +40,10 @@ CREATE TABLE carrito_compra (
 
 -- Crear la tabla de Detalle del Carrito
 CREATE TABLE detalle_carrito (
-    id_detalle INT PRIMARY KEY,
-    id_carrito INT,
-    id_producto INT,
-    cantidad INT,
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    id_carrito INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL,
     FOREIGN KEY (id_carrito) REFERENCES carrito_compra(id_carrito),
     FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );

@@ -125,23 +125,23 @@ module.exports = (db) => {
 
       //Sentencias del crud para la tabla clientes
       //curl http://localhost:5000/crud/readClientes
-      //curl -X POST -H "Content-Type: application/json" -d "{\"idCliente\":1,\"nombre\":\"Amin\",\"direccion\":\"Casa de habitación\",\"email\":\"aminmarin12@gmail.com\"}" http://localhost:5000/crud/createCliente
+      //curl -X POST -H "Content-Type: application/json" -d "{\"nombre\":\"Amin\",\"direccion\":\"Casa de habitación\",\"email\":\"aminmarin12@gmail.com\"}" http://localhost:5000/crud/createCliente
       //curl -X PUT -H "Content-Type: application/json" -d "{\"nombre\":\"Josh\",\"direccion\":\"Casa de su casa\",\"email\":\"josh234@gmail.com\"}" http://localhost:5000/crud/updateCliente/1
       //curl -X DELETE http://localhost:5000/crud/deleteCliente/1
 
       //ruta para insertar un nuevo registro en la tabla clientes
       router.post('/createCliente', (req, res) => {
         // Recibe los datos del nuevo registro desde el cuerpo de la solicitud (req.body)
-        const { idCliente, nombre, direccion, email } = req.body;
+        const { nombre, direccion, email } = req.body;
     
         // Verifica si se proporcionaron los datos necesarios
-        if (!idCliente || !nombre || !direccion || !email) {
+        if (!nombre || !direccion || !email) {
           return res.status(400).json({ error: 'Todos los campos son obligatorios' });
         }
     
         // Realiza la consulta SQL para insertar un nuevo registro con ID específico
-        const sql = `INSERT INTO clientes (id_cliente, nombre, direccion, email) VALUES (?, ?, ?, ?)`;
-        const values = [idCliente, nombre, direccion, email];
+        const sql = `INSERT INTO clientes (nombre, direccion, email) VALUES (?, ?, ?)`;
+        const values = [nombre, direccion, email];
     
         // Ejecuta la consulta
         db.query(sql, values, (err, result) => {
@@ -150,7 +150,7 @@ module.exports = (db) => {
             res.status(500).json({ error: 'Error al insertar un nuevo cliente' });
           } else {
             // Devuelve el mensaje como respuesta
-            res.status(201).json({ message: 'Cliente registrado con éxito' });
+            res.status(200).json({ message: 'Cliente registrado con éxito' });
           }
         });
       });
