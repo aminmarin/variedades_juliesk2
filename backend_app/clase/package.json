@@ -1,0 +1,16 @@
+{
+  "name": "backend_app",
+  "version": "1.0.0",
+  "description": "Es una app de una firma",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Waskar Rios - Brayan Montenegro",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}
